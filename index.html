@@ -352,6 +352,8 @@
             amount: document.getElementById("transactionAmount").value,
             vendor: document.getElementById("transactionVendor").value,
           };
+          var claims = JWTclaims(response.id_token);
+	  if (claims.hasOwnProperty("authLevel")) tx["authLevel"] = claims["authLevel"];
           var patch = [
             {
               operation: "add",
@@ -362,7 +364,6 @@
           var baseUrl = new URL(CONFIG.well_known_endpoint).origin;
           var xmlhttp = new XMLHttpRequest();
           console.log(response);
-          var claims = JWTclaims(response.id_token);
           console.log(`${baseUrl}/openidm/managed/alpha_user/${claims.sub}`);
 
           xmlhttp.open(
