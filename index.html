@@ -353,7 +353,7 @@
             vendor: document.getElementById("transactionVendor").value,
           };
           var claims = JWTclaims(response.id_token);
-	  if (claims.hasOwnProperty("authLevel")) tx["authLevel"] = claims["authLevel"];
+	  if (claims.hasOwnProperty("authLevel")) tx["authLevel"] = String(claims["authLevel"]);
           var patch = [
             {
               operation: "add",
